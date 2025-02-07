@@ -24,12 +24,16 @@ public class PerfTweaks {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public PerfTweaks() {
-//        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        /**
+         * Events
+         */
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 //        modEventBus.addListener(this::commonSetup);
-
         MinecraftForge.EVENT_BUS.register(this);
 
-//Register the config
+        /**
+         * Register the config
+         */
 //        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
         /**
