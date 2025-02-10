@@ -35,14 +35,6 @@ public class PerfTweaks {
          * Register the config
          */
 //        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-
-        /**
-         * Our mod is only required on the client side
-         */
-        ModLoadingContext.get().registerExtensionPoint(
-                IExtensionPoint.DisplayTest.class,
-                () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true)
-        );
     }
 
 //    private void commonSetup(final FMLCommonSetupEvent event) {}

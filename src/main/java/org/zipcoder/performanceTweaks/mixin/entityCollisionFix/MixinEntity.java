@@ -1,4 +1,4 @@
-package org.zipcoder.performanceTweaks.mixin;
+package org.zipcoder.performanceTweaks.mixin.entityCollisionFix;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
