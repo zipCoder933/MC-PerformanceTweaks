@@ -23,7 +23,8 @@ public class ModCommands {
          * Despwaning optimization
          */
         if (ConfigManager.INSTANCE.enableDespawningOptimization) {
-            builder.then(literal("persistence")
+            builder.then(literal("despawn")
+                    .then(Commands.literal("persistence")
                             .requires(source -> source.hasPermission(2))
                             .then(literal("add")
                                     .then(argument("mobName", StringArgumentType.greedyString())
@@ -32,7 +33,9 @@ public class ModCommands {
                             .then(literal("remove")
                                     .then(argument("mobName", StringArgumentType.greedyString())
                                             .suggests(DespawnCommandUtils::suggestConfiguredMobNames)
-                                            .executes(DespawnCommandUtils::removeMob))));
+                                            .executes(DespawnCommandUtils::removeMob)))
+                    )
+            );
         }
 
         /**

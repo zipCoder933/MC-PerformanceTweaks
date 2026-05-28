@@ -14,16 +14,17 @@ import net.minecraft.server.level.ServerLevel;
 @Mixin(MinecraftServer.class)
 public class MinecraftServerMixin {
 
-	@Inject(
-		method = "saveAllChunks",
-		at = @At(
-			value = "HEAD"
-		)
-	)
-	private void alternate_current$save(boolean silent, boolean bl2, boolean bl3, CallbackInfoReturnable<Boolean> cir) {
-		ServerLevel overworld = ((MinecraftServer) (Object) this).overworld();
-		WireHandler wireHandler = ((IServerLevel) overworld).alternate_current$getWireHandler();
-
-		wireHandler.getConfig().save(silent);
-	}
+    @Inject(
+            method = "saveAllChunks",
+            at = @At(
+                    value = "HEAD"
+            )
+    )
+    private void alternate_current$save(boolean silent, boolean bl2, boolean bl3, CallbackInfoReturnable<Boolean> cir) {
+        ServerLevel overworld = ((MinecraftServer) (Object) this).overworld();
+        if (overworld != null) {
+            WireHandler wireHandler = ((IServerLevel) overworld).alternate_current$getWireHandler();
+            wireHandler.getConfig().save(silent);
+        }
+    }
 }
