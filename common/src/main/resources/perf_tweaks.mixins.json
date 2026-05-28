@@ -10,11 +10,26 @@
         "alternateCurrent.ServerLevelMixin",
         "railOptimization.PoweredRailBlockMixin",
         "despawn.LivingEntityMixin",
-        "despawn.MobMixin"
+        "despawn.MobMixin",
+        "flerovium.Chunk.OcclusionCullerMixin"
     ],
     "client": [
         "entityCollision.MixinEntity",
-        "entityCollision.MixinLivingEntity"
+        "entityCollision.MixinLivingEntity",
+        "flerovium.Block.CrumblingRendererMixin",
+        "flerovium.Chunk.FrustumMixin",
+        "flerovium.Entity.ClientLevelMixin",
+        "flerovium.Entity.ModelPartMixin",
+        "flerovium.Item.ItemEntityRenderMixin",
+        "flerovium.Item.ItemRendererMixin",
+        "flerovium.Item.ItemTransformMixin",
+        "flerovium.Item.SimpleBakedModelMixin",
+        "flerovium.Particle.ParticleEngineMixin",
+        "flerovium.Particle.ParticleMixin",
+        "flerovium.Particle.SingleQuadParticleMixin",
+        "flerovium.Particle.SkipFarTerrainParticle",
+        "flerovium.Sound.ClientLevelMixin",
+        "flerovium.Sound.SoundEngineMixin"
     ],
     "server": [
     ],
