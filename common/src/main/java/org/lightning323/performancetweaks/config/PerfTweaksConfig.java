@@ -44,19 +44,6 @@ public class PerfTweaksConfig {
         ConfigManager.saveConfig();
     }
 
-    /**
-     *
-     *
-     * Flerovium config
-     */
-    @SerializedName("flerovium.entityBackFaceCulling")
-    public boolean entityBackFaceCulling = true;
-
-    @SerializedName("flerovium.itemBackFaceCulling")
-    public boolean itemBackFaceCulling = true;
-
-    @SerializedName("flerovium.reduceTerrainParticles")
-    public boolean reduceTerrainParticles = true;
 
 
 }
