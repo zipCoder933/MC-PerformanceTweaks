@@ -16,7 +16,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "org.lightning323.PerfTweaksFabric"
+          "org.lightning323.perftweaks.PerfTweaksFabric"
         ]
     },
     "mixins": [
