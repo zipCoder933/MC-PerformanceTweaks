@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
+import org.lightning323.perftweaks.Performancetweaks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,15 +20,10 @@ import java.util.function.Consumer;
 
 
 public class Almanac {
-
     public static boolean pickedItems = true;
-    public static final String MOD_ID = "almanac";
-
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static final Logger LOGGER = LoggerFactory.getLogger(Performancetweaks.MOD_ID);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
-    private static final List<Consumer<CommandDispatcher<CommandSourceStack>>> COMMAND_REGISTRATIONS = new ArrayList<>();
-    private static final Map<String, ConfigEntry<?>> CONFIG_ENTRIES = new ConcurrentHashMap<>();
+     private static final Map<String, ConfigEntry<?>> CONFIG_ENTRIES = new ConcurrentHashMap<>();
 
     @SuppressWarnings("unchecked")
     public static <T> void addConfigChangeListener(File configFile, Consumer<T> listener) {
@@ -37,9 +33,6 @@ public class Almanac {
         }
     }
 
-    public static void addCommandRegistration(Consumer<CommandDispatcher<CommandSourceStack>> registration) {
-        COMMAND_REGISTRATIONS.add(registration);
-    }
 
     public static <T> T loadConfig(File configFile, Class<T> configClass) {
         T config = loadConfigFromFile(configFile, configClass);

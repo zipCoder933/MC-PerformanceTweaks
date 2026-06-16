@@ -20,105 +20,104 @@ import org.lightning323.perftweaks.optimizations.redstone.wire.WireHandler;
 
 public class AlternateCurrentCommand {
 
-	private static final DynamicCommandExceptionType NO_SUCH_UPDATE_ORDER = new DynamicCommandExceptionType(value -> Component.literal("no such update order: " + value));
+    private static final DynamicCommandExceptionType NO_SUCH_UPDATE_ORDER = new DynamicCommandExceptionType(value -> Component.literal("no such update order: " + value));
 
-	private static final String[] UPDATE_ORDERS;
+    private static final String[] UPDATE_ORDERS;
 
-	static {
-		UpdateOrder[] updateOrders = UpdateOrder.values();
-		UPDATE_ORDERS = new String[updateOrders.length];
+    static {
+        UpdateOrder[] updateOrders = UpdateOrder.values();
+        UPDATE_ORDERS = new String[updateOrders.length];
 
-		for (int i = 0; i < updateOrders.length; i++) {
-			UPDATE_ORDERS[i] = updateOrders[i].id();
-		}
-	}
+        for (int i = 0; i < updateOrders.length; i++) {
+            UPDATE_ORDERS[i] = updateOrders[i].id();
+        }
+    }
 
-	public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-		LiteralArgumentBuilder<CommandSourceStack> builder = Commands.
-			literal("alternatecurrent").
-			requires(source -> source.hasPermission(2)).
-			executes(context -> queryEnabled(context.getSource())).
-			then(Commands.
-				literal("on").
-				executes(context -> setEnabled(context.getSource(), true))).
-			then(Commands.
-				literal("off").
-				executes(context -> setEnabled(context.getSource(), false))).
-			then(Commands.
-				literal("updateOrder").
-				executes(context -> queryUpdateOrder(context.getSource())).
-				then(Commands.
-					argument("updateOrder", StringArgumentType.word()).
-					suggests((context, suggestionBuilder) -> SharedSuggestionProvider.suggest(UPDATE_ORDERS, suggestionBuilder)).
-					executes(context -> setUpdateOrder(context.getSource(), parseUpdateOrder(context, "updateOrder"))))).
-			then(Commands.
-				literal("resetProfiler").
-				requires(source -> AlternateCurrentMod.DEBUG).
-				executes(context -> resetProfiler(context.getSource())));
+    public static LiteralArgumentBuilder<CommandSourceStack> build() {
+        LiteralArgumentBuilder<CommandSourceStack> builder = Commands.
+                literal("alternatecurrent").
+                requires(source -> source.hasPermission(2)).
+                executes(context -> queryEnabled(context.getSource())).
+                then(Commands.
+                        literal("on").
+                        executes(context -> setEnabled(context.getSource(), true))).
+                then(Commands.
+                        literal("off").
+                        executes(context -> setEnabled(context.getSource(), false))).
+                then(Commands.
+                        literal("updateOrder").
+                        executes(context -> queryUpdateOrder(context.getSource())).
+                        then(Commands.
+                                argument("updateOrder", StringArgumentType.word()).
+                                suggests((context, suggestionBuilder) -> SharedSuggestionProvider.suggest(UPDATE_ORDERS, suggestionBuilder)).
+                                executes(context -> setUpdateOrder(context.getSource(), parseUpdateOrder(context, "updateOrder"))))).
+                then(Commands.
+                        literal("resetProfiler").
+                        requires(source -> AlternateCurrentMod.DEBUG).
+                        executes(context -> resetProfiler(context.getSource())));
+        return builder;
+    }
 
-		dispatcher.register(builder);
-	}
+    private static UpdateOrder parseUpdateOrder(CommandContext<CommandSourceStack> context, String name) throws CommandSyntaxException {
+        String value = StringArgumentType.getString(context, name);
 
-	private static UpdateOrder parseUpdateOrder(CommandContext<CommandSourceStack> context, String name) throws CommandSyntaxException {
-		String value = StringArgumentType.getString(context, name);
+        try {
+            return UpdateOrder.byId(value);
+        } catch (Exception e) {
+            throw NO_SUCH_UPDATE_ORDER.create(name);
+        }
+    }
 
-		try {
-			return UpdateOrder.byId(value);
-		} catch (Exception e) {
-			throw NO_SUCH_UPDATE_ORDER.create(name);
-		}
-	}
+    private static int queryEnabled(CommandSourceStack source) {
+        ServerLevel level = source.getLevel();
+        WireHandler wireHandler = ((IServerLevel) level).alternate_current$getWireHandler();
 
-	private static int queryEnabled(CommandSourceStack source) {
-		ServerLevel level = source.getLevel();
-		WireHandler wireHandler = ((IServerLevel) level).alternate_current$getWireHandler();
+        String state = wireHandler.getConfig().getEnabled() ? "enabled" : "disabled";
+        source.sendSuccess(() -> Component.literal(String.format("Alternate Current is currently %s", state)), false);
 
-		String state = wireHandler.getConfig().getEnabled() ? "enabled" : "disabled";
-		source.sendSuccess(() -> Component.literal(String.format("Alternate Current is currently %s", state)), false);
+        return Command.SINGLE_SUCCESS;
+    }
 
-		return Command.SINGLE_SUCCESS;
-	}
+    private static int setEnabled(CommandSourceStack source, boolean on) {
+        ServerLevel level = source.getLevel();
+        WireHandler wireHandler = ((IServerLevel) level).alternate_current$getWireHandler();
 
-	private static int setEnabled(CommandSourceStack source, boolean on) {
-		ServerLevel level = source.getLevel();
-		WireHandler wireHandler = ((IServerLevel) level).alternate_current$getWireHandler();
+        wireHandler.getConfig().setEnabled(on);
 
-		wireHandler.getConfig().setEnabled(on);
+        String state = wireHandler.getConfig().getEnabled() ? "enabled" : "disabled";
+        source.sendSuccess(() -> Component.literal(String.format("Alternate Current has been %s!", state)), true);
 
-		String state = wireHandler.getConfig().getEnabled() ? "enabled" : "disabled";
-		source.sendSuccess(() -> Component.literal(String.format("Alternate Current has been %s!", state)), true);
+        return Command.SINGLE_SUCCESS;
+    }
 
-		return Command.SINGLE_SUCCESS;
-	}
+    private static int queryUpdateOrder(CommandSourceStack source) {
+        ServerLevel level = source.getLevel();
+        WireHandler wireHandler = ((IServerLevel) level).alternate_current$getWireHandler();
 
-	private static int queryUpdateOrder(CommandSourceStack source) {
-		ServerLevel level = source.getLevel();
-		WireHandler wireHandler = ((IServerLevel) level).alternate_current$getWireHandler();
+        String value = wireHandler.getConfig().getUpdateOrder().id();
+        source.sendSuccess(() -> Component.literal(String.format("Update order is currently %s", value)), false);
 
-		String value = wireHandler.getConfig().getUpdateOrder().id();
-		source.sendSuccess(() -> Component.literal(String.format("Update order is currently %s", value)), false);
+        return Command.SINGLE_SUCCESS;
+    }
 
-		return Command.SINGLE_SUCCESS;
-	}
+    private static int setUpdateOrder(CommandSourceStack source, UpdateOrder updateOrder) {
+        ServerLevel level = source.getLevel();
+        WireHandler wireHandler = ((IServerLevel) level).alternate_current$getWireHandler();
 
-	private static int setUpdateOrder(CommandSourceStack source, UpdateOrder updateOrder) {
-		ServerLevel level = source.getLevel();
-		WireHandler wireHandler = ((IServerLevel) level).alternate_current$getWireHandler();
+        wireHandler.getConfig().setUpdateOrder(updateOrder);
 
-		wireHandler.getConfig().setUpdateOrder(updateOrder);
+        String value = wireHandler.getConfig().getUpdateOrder().id();
+        source.sendSuccess(() -> Component.literal(String.format("update order has been set to %s!", value)), true);
 
-		String value = wireHandler.getConfig().getUpdateOrder().id();
-		source.sendSuccess(() -> Component.literal(String.format("update order has been set to %s!", value)), true);
+        return Command.SINGLE_SUCCESS;
+    }
 
-		return Command.SINGLE_SUCCESS;
-	}
+    private static int resetProfiler(CommandSourceStack source) {
+        source.sendSuccess(() -> Component.literal("profiler results have been cleared!"), true);
 
-	private static int resetProfiler(CommandSourceStack source) {
-		source.sendSuccess(() -> Component.literal("profiler results have been cleared!"), true);
+        ProfilerResults.log();
+        ProfilerResults.clear();
 
-		ProfilerResults.log();
-		ProfilerResults.clear();
-
-		return Command.SINGLE_SUCCESS;
-	}
+        return Command.SINGLE_SUCCESS;
+    }
 }

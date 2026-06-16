@@ -2,6 +2,7 @@ package org.lightning323.perftweaks.optimizations.despawn.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
@@ -18,8 +19,8 @@ import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
 public class LetMeDespawnCommands {
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(literal("letmedespawn")
+    public static LiteralArgumentBuilder<CommandSourceStack> build() {
+        return literal("letmedespawn")
                 .requires(source -> source.hasPermission(2))
                 .then(literal("add")
                         .then(argument("mobName", StringArgumentType.greedyString())
@@ -28,7 +29,7 @@ public class LetMeDespawnCommands {
                 .then(literal("remove")
                         .then(argument("mobName", StringArgumentType.greedyString())
                                 .suggests(LetMeDespawnCommands::suggestConfiguredMobNames)
-                                .executes(LetMeDespawnCommands::removeMob))));
+                                .executes(LetMeDespawnCommands::removeMob)));
     }
 
     private static CompletableFuture<Suggestions> suggestMobNames(CommandContext<CommandSourceStack> context, SuggestionsBuilder builder) {

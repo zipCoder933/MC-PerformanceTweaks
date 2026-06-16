@@ -32,7 +32,6 @@ public final class LetMeDespawn {
             logger.info("LetMeDespawn config reloaded");
         });
         config.save();
-        Almanac.addCommandRegistration(LetMeDespawnCommands::register);
     }
 
     public static void setPersistence(Mob entity, EquipmentSlot slot) {
