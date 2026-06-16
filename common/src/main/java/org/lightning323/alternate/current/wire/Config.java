@@ -1,20 +1,19 @@
 package org.lightning323.alternate.current.wire;
 
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.LevelResource;
+import net.minecraft.world.level.storage.LevelStorageSource.LevelStorageAccess;
+import org.lightning323.alternate.current.AlternateCurrentMod;
+import org.lightning323.alternate.current.interfaces.mixin.IServerLevel;
+import org.lightning323.performancetweaks.config.ConfigManager;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
-
-import org.lightning323.alternate.current.AlternateCurrentMod;
-import org.lightning323.alternate.current.interfaces.mixin.IServerLevel;
-
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.LevelResource;
-import net.minecraft.world.level.storage.LevelStorageSource.LevelStorageAccess;
-import org.lightning323.performancetweaks.config.ConfigManager;
 
 public interface Config {
 

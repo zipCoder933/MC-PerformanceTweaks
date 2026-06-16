@@ -1,8 +1,5 @@
 package org.lightning323.frikinjay.letmedespawn;
 
-import org.lightning323.frikinjay.almanac.Almanac;
-import org.lightning323.frikinjay.letmedespawn.command.LetMeDespawnCommands;
-import org.lightning323.frikinjay.letmedespawn.config.LetMeDespawnConfig;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -11,6 +8,10 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import org.lightning323.frikinjay.almanac.Almanac;
+import org.lightning323.frikinjay.letmedespawn.command.LetMeDespawnCommands;
+import org.lightning323.frikinjay.letmedespawn.config.LetMeDespawnConfig;
+import org.lightning323.mixin.letMeDespawn.MobAccessor;
 import org.lightning323.performancetweaks.Performancetweaks;
 import org.slf4j.Logger;
 
@@ -47,7 +48,9 @@ public final class LetMeDespawn {
         nbt.putBoolean("picked", true);
         itemStack.set(DataComponents.CUSTOM_DATA, CustomData.of(nbt));
         Almanac.pickedItems = true;
-        entity.persistenceRequired = LetMeDespawn.config.getMobNames().contains(entity.level().registryAccess().registryOrThrow(Registries.ENTITY_TYPE).getKey(entity.getType()).toString()) || !hasDespawnableName(entity);
+        ((MobAccessor) entity).setPersistenceRequired(
+                LetMeDespawn.config.getMobNames().contains(entity.level().registryAccess().registryOrThrow(Registries.ENTITY_TYPE).getKey(entity.getType()).toString()) || !hasDespawnableName(entity)
+        );
     }
 
     public static boolean hasDespawnableName(Mob entity) {

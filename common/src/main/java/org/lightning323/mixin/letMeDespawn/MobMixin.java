@@ -10,17 +10,21 @@ import org.lightning323.frikinjay.almanac.Almanac;
 import org.lightning323.frikinjay.letmedespawn.LetMeDespawn;
 import org.lightning323.frikinjay.letmedespawn.MobMixinUtils;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = Mob.class)
-public abstract class MobMixin extends LivingEntity {
+public abstract class MobMixin extends LivingEntity{
 
     protected MobMixin(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
     }
+
+
+
 
     @Inject(
             at = {@At("TAIL")},

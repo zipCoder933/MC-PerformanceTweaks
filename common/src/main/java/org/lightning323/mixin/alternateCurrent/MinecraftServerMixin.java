@@ -1,15 +1,13 @@
 package org.lightning323.mixin.alternateCurrent;
 
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import org.lightning323.alternate.current.interfaces.mixin.IServerLevel;
+import org.lightning323.alternate.current.wire.WireHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import org.lightning323.alternate.current.interfaces.mixin.IServerLevel;
-import org.lightning323.alternate.current.wire.WireHandler;
-
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
 
 @Mixin(MinecraftServer.class)
 public class MinecraftServerMixin {

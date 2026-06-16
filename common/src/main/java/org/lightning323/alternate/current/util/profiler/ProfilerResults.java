@@ -1,13 +1,12 @@
 package org.lightning323.alternate.current.util.profiler;
 
+import org.apache.logging.log4j.Logger;
+import org.lightning323.alternate.current.AlternateCurrentMod;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.apache.logging.log4j.Logger;
-
-import org.lightning323.alternate.current.AlternateCurrentMod;
 
 public class ProfilerResults {
 	

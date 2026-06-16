@@ -1,12 +1,11 @@
 package org.lightning323.alternate.current.util.profiler;
 
+import org.apache.logging.log4j.Logger;
+import org.lightning323.alternate.current.AlternateCurrentMod;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-
-import org.apache.logging.log4j.Logger;
-
-import org.lightning323.alternate.current.AlternateCurrentMod;
 
 public class ACProfiler implements Profiler {
 	

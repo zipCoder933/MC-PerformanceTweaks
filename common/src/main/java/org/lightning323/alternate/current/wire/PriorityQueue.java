@@ -1,10 +1,10 @@
 package org.lightning323.alternate.current.wire;
 
+import net.minecraft.world.level.redstone.Redstone;
+
 import java.util.AbstractQueue;
 import java.util.Arrays;
 import java.util.Iterator;
-
-import net.minecraft.world.level.redstone.Redstone;
 
 public class PriorityQueue extends AbstractQueue<Node> {
 

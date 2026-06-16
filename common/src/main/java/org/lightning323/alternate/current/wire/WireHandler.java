@@ -1,27 +1,25 @@
 package org.lightning323.alternate.current.wire;
 
-import java.util.Iterator;
-import java.util.Queue;
-
-//import alternate.current.AlternateCurrentMod;
-//import alternate.current.util.profiler.Profiler;
-
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap.Entry;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMaps;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-
 import net.minecraft.world.level.redstone.InstantNeighborUpdater;
 import net.minecraft.world.level.redstone.NeighborUpdater;
 import net.minecraft.world.level.redstone.Redstone;
 import net.minecraft.world.level.storage.LevelStorageSource.LevelStorageAccess;
+
+import java.util.Iterator;
+import java.util.Queue;
+
+//import alternate.current.AlternateCurrentMod;
+//import alternate.current.util.profiler.Profiler;
 
 /**
  * This class handles power changes for redstone wire. The algorithm was

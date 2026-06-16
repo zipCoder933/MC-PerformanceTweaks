@@ -1,11 +1,11 @@
 package org.lightning323.performancetweaks;
 
-import org.lightning323.frikinjay.letmedespawn.LetMeDespawn;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lightning323.alternate.current.command.AlternateCurrentCommand;
+import org.lightning323.frikinjay.letmedespawn.LetMeDespawn;
 
 import java.io.File;
 

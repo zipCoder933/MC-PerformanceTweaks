@@ -1,10 +1,10 @@
 package org.lightning323.alternate.current.wire;
 
-import java.util.Arrays;
-import java.util.function.Consumer;
-
 import org.lightning323.alternate.current.wire.WireHandler.Directions;
 import org.lightning323.alternate.current.wire.WireHandler.NodeProvider;
+
+import java.util.Arrays;
+import java.util.function.Consumer;
 
 public class WireConnectionManager {
 

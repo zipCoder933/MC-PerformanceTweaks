@@ -1,6 +1,5 @@
 package org.lightning323.frikinjay.letmedespawn.command;
 
-import org.lightning323.frikinjay.letmedespawn.LetMeDespawn;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -11,6 +10,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.MobCategory;
+import org.lightning323.frikinjay.letmedespawn.LetMeDespawn;
 
 import java.util.concurrent.CompletableFuture;
 

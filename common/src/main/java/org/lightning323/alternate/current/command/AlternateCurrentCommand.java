@@ -7,18 +7,16 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
-
-import org.lightning323.alternate.current.AlternateCurrentMod;
-import org.lightning323.alternate.current.interfaces.mixin.IServerLevel;
-import org.lightning323.alternate.current.util.profiler.ProfilerResults;
-import org.lightning323.alternate.current.wire.UpdateOrder;
-import org.lightning323.alternate.current.wire.WireHandler;
-
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import org.lightning323.alternate.current.AlternateCurrentMod;
+import org.lightning323.alternate.current.interfaces.mixin.IServerLevel;
+import org.lightning323.alternate.current.util.profiler.ProfilerResults;
+import org.lightning323.alternate.current.wire.UpdateOrder;
+import org.lightning323.alternate.current.wire.WireHandler;
 
 public class AlternateCurrentCommand {
 

@@ -1,37 +1,36 @@
 {
-  "schemaVersion": 1,
-  "id": "perf_tweaks",
-  "version": "${version}",
-  "name": "Performance Tweaks",
-  "description": "",
-  "authors": [
-    "Lightning323"
-  ],
-  "contact": {
-    "homepage": ""
-  },
-  "license": "MIT",
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "org.lightning323.performancetweaks.fabric.PerformanceTweaksFabric"
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
     ],
-    "client": [
-      "org.lightning323.performancetweaks.fabric.client.perftweaksFabricClient"
-    ]
-  },
-  "mixins": [
-    "perf_tweaks.mixins.json"
-  ],
-  "accessWidener" : "perf_tweaks.accesswidener",
-  "depends": {
-    "fabricloader": ">=0.18.4",
-    "minecraft": "~1.21.1",
-    "java": ">=21",
-    "architectury": ">=13.0.8",
-    "fabric-api": "*"
-  },
-  "suggests": {
-    "another-mod": "*"
-  }
+    "contact": {
+        "homepage": "https://fabricmc.net/",
+        "sources": "https://github.com/FabricMC/fabric-example-mod"
+    },
+    "license": "${license}",
+    "icon": "${mod_id}.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "org.lightning323.PerfTweaksFabric"
+        ]
+    },
+    "mixins": [
+        "${mod_id}.mixins.json",
+        "${mod_id}.fabric.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-api": "*",
+        "minecraft": "${minecraft_version}",
+        "java": ">=${java_version}"
+    },
+    "suggests": {
+        "another-mod": "*"
+    }
 }
+  

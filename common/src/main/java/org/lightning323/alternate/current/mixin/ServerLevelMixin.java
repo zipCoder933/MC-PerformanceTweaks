@@ -1,16 +1,5 @@
 package org.lightning323.alternate.current.mixin;
 
-import java.util.List;
-import java.util.concurrent.Executor;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import org.lightning323.alternate.current.interfaces.mixin.IServerLevel;
-import org.lightning323.alternate.current.wire.WireHandler;
-
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -21,6 +10,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.storage.LevelStorageSource;
 import net.minecraft.world.level.storage.ServerLevelData;
+import org.lightning323.alternate.current.interfaces.mixin.IServerLevel;
+import org.lightning323.alternate.current.wire.WireHandler;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
+import java.util.concurrent.Executor;
 
 @Mixin(ServerLevel.class)
 public class ServerLevelMixin implements IServerLevel {
