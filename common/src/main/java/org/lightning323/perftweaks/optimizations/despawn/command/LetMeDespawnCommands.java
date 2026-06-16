@@ -1,6 +1,5 @@
 package org.lightning323.perftweaks.optimizations.despawn.command;
 
-import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
@@ -11,7 +10,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.MobCategory;
-import org.lightning323.perftweaks.optimizations.despawn.LetMeDespawn;
+import org.lightning323.perftweaks.optimizations.despawn.Despawn;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -20,7 +19,7 @@ import static net.minecraft.commands.Commands.literal;
 
 public class LetMeDespawnCommands {
     public static LiteralArgumentBuilder<CommandSourceStack> build() {
-        return literal("letmedespawn")
+        return literal("despawn")
                 .requires(source -> source.hasPermission(2))
                 .then(literal("add")
                         .then(argument("mobName", StringArgumentType.greedyString())
@@ -42,7 +41,7 @@ public class LetMeDespawnCommands {
     }
 
     private static CompletableFuture<Suggestions> suggestConfiguredMobNames(CommandContext<CommandSourceStack> context, SuggestionsBuilder builder) {
-        LetMeDespawn.config.getMobNames().stream()
+        Despawn.getMobNames().stream()
                 .filter(mobName -> mobName.startsWith(builder.getRemaining()))
                 .forEach(builder::suggest);
         return builder.buildFuture();
@@ -50,20 +49,20 @@ public class LetMeDespawnCommands {
 
     private static int addMob(CommandContext<CommandSourceStack> context) {
         String mobName = StringArgumentType.getString(context, "mobName");
-        if (LetMeDespawn.config.getMobNames().contains(mobName)) {
+        if (Despawn.getMobNames().contains(mobName)) {
             context.getSource().sendSuccess(() -> Component.literal("Mob '" + mobName + "' is already in the configuration.").withStyle(ChatFormatting.RED), false);
         } else {
-            LetMeDespawn.config.addMobName(mobName);
-            context.getSource().sendSuccess(() -> Component.literal("Added '" + mobName + "' to LetMeDespawn configuration.").withStyle(ChatFormatting.AQUA), true);
+            Despawn.addMobName(mobName);
+            context.getSource().sendSuccess(() -> Component.literal("Added '" + mobName + "' to configuration.").withStyle(ChatFormatting.AQUA), true);
         }
         return 1;
     }
 
     private static int removeMob(CommandContext<CommandSourceStack> context) {
         String mobName = StringArgumentType.getString(context, "mobName");
-        if (LetMeDespawn.config.getMobNames().contains(mobName)) {
-            LetMeDespawn.config.removeMobName(mobName);
-            context.getSource().sendSuccess(() -> Component.literal("Removed '" + mobName + "' from LetMeDespawn configuration.").withStyle(ChatFormatting.GOLD), true);
+        if (Despawn.getMobNames().contains(mobName)) {
+            Despawn.removeMobName(mobName);
+            context.getSource().sendSuccess(() -> Component.literal("Removed '" + mobName + "' from configuration.").withStyle(ChatFormatting.GOLD), true);
         } else {
             context.getSource().sendSuccess(() -> Component.literal("Mob '" + mobName + "' is not in the configuration.").withStyle(ChatFormatting.RED), false);
         }

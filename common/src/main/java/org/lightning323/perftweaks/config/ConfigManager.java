@@ -20,10 +20,10 @@ public class ConfigManager {
         if (configFile.exists()) {
             try (FileReader reader = new FileReader(configFile)) {
                 INSTANCE = GSON.fromJson(reader, ModConfig.class);
-                LOGGER.info("Loaded config {}", configFile.getAbsolutePath());
+                LOG.info("Loaded config {}", configFile.getAbsolutePath());
             } catch (IOException e) {
                 INSTANCE = new ModConfig();
-                LOGGER.error("Error loading config {}", configFile.getAbsolutePath());
+                LOG.error("Error loading config {}", configFile.getAbsolutePath());
             }
         } else {
             INSTANCE = new ModConfig();
@@ -34,7 +34,7 @@ public class ConfigManager {
     public static void init(File path) {
         File configDir = new File(path, MOD_ID);
         if (configDir.mkdirs()) {
-            LOGGER.info("Made config dir at {}", configDir.getAbsolutePath());
+            LOG.info("Made config dir at {}", configDir.getAbsolutePath());
         }
         configFile = new File(configDir, MOD_ID + ".json");
         load();
@@ -43,10 +43,10 @@ public class ConfigManager {
     public static void save() {
         try (FileWriter writer = new FileWriter(configFile)) {
             GSON.toJson(INSTANCE, writer);
-            LOGGER.info("Saved config {}", configFile.getAbsolutePath());
+            LOG.info("Saved config {}", configFile.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
-            LOGGER.error("Error saving config {}", configFile.getAbsolutePath());
+            LOG.error("Error saving config {}", configFile.getAbsolutePath());
         }
     }
 

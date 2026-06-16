@@ -35,7 +35,7 @@ public class AlternateCurrentCommand {
 
     public static LiteralArgumentBuilder<CommandSourceStack> build() {
         LiteralArgumentBuilder<CommandSourceStack> builder = Commands.
-                literal("alternatecurrent").
+                literal("redstone").
                 requires(source -> source.hasPermission(2)).
                 executes(context -> queryEnabled(context.getSource())).
                 then(Commands.

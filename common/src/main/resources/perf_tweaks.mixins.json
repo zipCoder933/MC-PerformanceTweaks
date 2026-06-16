@@ -10,12 +10,11 @@
     "alternateCurrent.ServerLevelMixin",
     "railOptimization.PoweredRailBlockMixin",
     "letMeDespawn.MobMixin",
-    "letMeDespawn.MobAccessor",
-    "letMeDespawn.LivingEntityMixin"
+    "accessor.MobAccessor",
+    "MixinLivingEntity"
   ],
   "client": [
-    "entityCollisionFix.MixinEntity",
-    "entityCollisionFix.MixinLivingEntity"
+    "entityCollisionFix.MixinEntity"
   ],
   "server": [],
   "injectors": {

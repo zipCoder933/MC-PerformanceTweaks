@@ -1,4 +1,4 @@
-package org.lightning323.perftweaks.mixin.letMeDespawn;
+package org.lightning323.perftweaks.mixin.accessor;
 
 import net.minecraft.world.entity.Mob;
 import org.spongepowered.asm.mixin.Mixin;
